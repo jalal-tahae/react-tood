@@ -1,29 +1,32 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import './App.css'
+import "./App.css";
 
 function App() {
-  
-    const [tasks, setTasks] = useState([]);
-  const [taskInput, setTaskInput] = useState('');
-
+  const [tasks, setTasks] = useState([]);
+  const [taskInput, setTaskInput] = useState("");
   const addTask = () => {
     if (taskInput.trim()) {
-      setTasks([...tasks, { id: Math.random().toString(), text: taskInput, completed: false }]);
-      setTaskInput('');
+      setTasks([
+        ...tasks,
+        { id: Math.random().toString(), text: taskInput, completed: false },
+      ]);
+      setTaskInput("");
     }
   };
 
   const toggleComplete = (id) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task,
+      ),
+    );
   };
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
-    return (
+  return (
     <div className="App">
       <h1>To-Do App</h1>
       <input
@@ -34,13 +37,13 @@ function App() {
       />
       <button onClick={addTask}>Add Task</button>
       <ul>
-        {tasks.map(task => (
-          <li key={task.id} style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
+        {tasks.map((task) => (
+          <li
+            key={task.id}
+            style={{ textDecoration: task.completed ? "line-through" : "none" }}
+          >
             {task.text}
-            <span onClick={() => toggleComplete(task.id)}>
-              {' '}
-              [Completed]
-            </span>
+            <span onClick={() => toggleComplete(task.id)}> [Completed]</span>
             <button onClick={() => deleteTask(task.id)}>Delete</button>
           </li>
         ))}
@@ -49,4 +52,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
